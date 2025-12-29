@@ -86,7 +86,7 @@ For more information about text-to-speech using the OpenAI API, check out our [d
 
 3. **Build and run with Docker Compose:**
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 
    The app will be available at [`http://localhost:3000`](http://localhost:3000).
@@ -115,27 +115,27 @@ For more information about text-to-speech using the OpenAI API, check out our [d
 
 - **Run without PostgreSQL (if you don't need sharing feature):**
   ```bash
-  docker-compose -f docker-compose.simple.yml up -d
+  docker compose -f docker-compose.simple.yml up -d
   ```
 
 - **Stop the containers:**
   ```bash
-  docker-compose down
+  docker compose down
   ```
 
 - **View logs:**
   ```bash
-  docker-compose logs -f
+  docker compose logs -f
   ```
 
 - **Rebuild after changes:**
   ```bash
-  docker-compose up -d --build
+  docker compose up -d --build
   ```
 
 - **Remove volumes (clean database):**
   ```bash
-  docker-compose down -v
+  docker compose down -v
   ```
 
 ## Contributors

@@ -8,8 +8,8 @@ These files are **required** for the Docker build to work:
 
 #### Docker Configuration
 - `Dockerfile` - Docker build instructions
-- `docker-compose.yml` - Full setup with PostgreSQL
-- `docker-compose.simple.yml` - Simplified setup without PostgreSQL (optional, choose one)
+- `docker compose.yml` - Full setup with PostgreSQL
+- `docker compose.simple.yml` - Simplified setup without PostgreSQL (optional, choose one)
 - `.dockerignore` - Excludes unnecessary files from build
 
 #### Application Source Code
@@ -60,7 +60,7 @@ cd openai-fm
 cp .env.example .env
 # Edit .env with your API keys
 nano .env
-docker-compose up -d
+docker compose up -d
 ```
 
 ### Method 2: Copy Files via SCP/RSYNC
@@ -83,7 +83,7 @@ tar -czf openai-fm-deploy.tar.gz \
   --exclude='.git' \
   --exclude='.env' \
   --exclude='*.log' \
-  Dockerfile docker-compose.yml docker-compose.simple.yml \
+  Dockerfile docker compose.yml docker compose.simple.yml \
   .dockerignore init-db.sql \
   package.json package-lock.json \
   *.config.* *.json *.ts *.mjs \
@@ -103,7 +103,7 @@ If you want to manually copy only essential files:
 ```
 openai-fm/
 ├── Dockerfile
-├── docker-compose.yml (or docker-compose.simple.yml)
+├── docker compose.yml (or docker compose.simple.yml)
 ├── .dockerignore
 ├── init-db.sql
 ├── package.json
@@ -131,12 +131,12 @@ openai-fm/
 
 3. **Build and run**:
    ```bash
-   docker-compose up -d --build
+   docker compose up -d --build
    ```
 
 4. **Check logs**:
    ```bash
-   docker-compose logs -f
+   docker compose logs -f
    ```
 
 5. **Verify** the app is running:
@@ -162,5 +162,5 @@ Or use external database:
 - The Dockerfile builds everything from source, so you need all source files
 - `node_modules` and `.next` are built during the Docker build process
 - Never commit `.env` file to version control
-- The database is automatically initialized on first run (if using docker-compose.yml)
+- The database is automatically initialized on first run (if using docker compose.yml)
 
