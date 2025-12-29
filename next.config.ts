@@ -16,6 +16,7 @@ const CSP = [
   .join(" ");
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   turbopack: {
     rules: {
       "*.svg": {

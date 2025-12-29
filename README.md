@@ -65,6 +65,79 @@ For more information about text-to-speech using the OpenAI API, check out our [d
 > [!NOTE]  
 > Be aware that if you deploy this app to a public server, you are responsible for any usage it may incur using your OpenAI API key.
 
+## Docker Setup
+
+### Quick Start with Docker Compose
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/openai/openai-fm.git
+   cd openai-fm
+   ```
+
+2. **Create a `.env` file:**
+   ```bash
+   cp .env.example .env
+   ```
+   Then edit `.env` and add your OpenAI API key:
+   ```bash
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+
+3. **Build and run with Docker Compose:**
+   ```bash
+   docker-compose up -d
+   ```
+
+   The app will be available at [`http://localhost:3000`](http://localhost:3000).
+
+4. **Database initialization:**
+   The database schema is automatically initialized when the PostgreSQL container starts for the first time. The sharing feature will work out of the box.
+
+### Using Docker Only (without Docker Compose)
+
+1. **Build the Docker image:**
+   ```bash
+   docker build -t openai-fm .
+   ```
+
+2. **Run the container:**
+   ```bash
+   docker run -p 3000:3000 -e OPENAI_API_KEY=your_api_key_here openai-fm
+   ```
+
+   Or with a `.env` file:
+   ```bash
+   docker run -p 3000:3000 --env-file .env openai-fm
+   ```
+
+### Docker Compose Options
+
+- **Run without PostgreSQL (if you don't need sharing feature):**
+  ```bash
+  docker-compose -f docker-compose.simple.yml up -d
+  ```
+
+- **Stop the containers:**
+  ```bash
+  docker-compose down
+  ```
+
+- **View logs:**
+  ```bash
+  docker-compose logs -f
+  ```
+
+- **Rebuild after changes:**
+  ```bash
+  docker-compose up -d --build
+  ```
+
+- **Remove volumes (clean database):**
+  ```bash
+  docker-compose down -v
+  ```
+
 ## Contributors
 
 ### OpenAI team
