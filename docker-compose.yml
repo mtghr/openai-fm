@@ -5,12 +5,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        NPM_TOKEN: ${NPM_TOKEN}
+        REACT_APP_AUTH_API: ${REACT_APP_AUTH_API}
+        REACT_APP_LOGIN_PORTAL: ${REACT_APP_LOGIN_PORTAL}
     ports:
       - "3000:3000"
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - POSTGRES_URL=${POSTGRES_URL:-postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-openai_fm}}
       - NODE_ENV=production
+      - REACT_APP_AUTH_API=${REACT_APP_AUTH_API:-https://auth-dev.dataphone.cloud:8443}
+      - REACT_APP_LOGIN_PORTAL=${REACT_APP_LOGIN_PORTAL:-}
     env_file:
       - .env
     depends_on:

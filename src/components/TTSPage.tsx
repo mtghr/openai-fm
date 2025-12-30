@@ -17,6 +17,7 @@ import { useBodyScrollable } from "@/hooks/useBodyScrollable";
 import { Button, ButtonLED } from "./ui/Button";
 import { appStore } from "@/lib/store";
 import BrowserNotSupported from "./ui/BrowserNotSupported";
+import { useAuthModule } from "@data-phone/react-resource-server-auth";
 
 const EXPRESSIVE_VOICES = ["ash", "ballad", "coral", "sage", "verse"];
 
@@ -37,6 +38,8 @@ export default function TtsPage() {
 }
 
 const Board = () => {
+  const { data: session } = useAuthModule();
+
   const voice = appStore.useState((state) => state.voice);
   const input = appStore.useState((state) => state.input);
   const inputDirty = appStore.useState((state) => state.inputDirty);
@@ -46,6 +49,8 @@ const Board = () => {
   const browserNotSupported = appStore.useState(
     () => !("serviceWorker" in navigator)
   );
+
+  console.log("session", session);
 
   const handleRefreshLibrarySet = () => {
     const nextSet = getRandomLibrarySet();

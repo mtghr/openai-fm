@@ -1,11 +1,20 @@
 import type { NextConfig } from "next";
 
 const IS_DEV = process.env.NODE_ENV !== "production";
+const AUTH_ORIGIN = (() => {
+  const url = process.env.REACT_APP_AUTH_API;
+  if (!url) return null;
+  try {
+    return new URL(url).origin;
+  } catch {
+    return null;
+  }
+})();
 
 const CSP = [
   "default-src 'self';",
   "script-src 'self' 'unsafe-eval' 'unsafe-inline' ;",
-  "connect-src 'self';",
+  `connect-src 'self'${AUTH_ORIGIN ? ` ${AUTH_ORIGIN}` : ""};`,
   "style-src 'self' 'unsafe-inline';",
   "img-src 'self'",
   "object-src 'none';",
@@ -17,6 +26,10 @@ const CSP = [
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  env: {
+    REACT_APP_AUTH_API: process.env.REACT_APP_AUTH_API,
+    REACT_APP_LOGIN_PORTAL: process.env.REACT_APP_LOGIN_PORTAL,
+  },
   turbopack: {
     rules: {
       "*.svg": {
